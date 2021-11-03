@@ -6,7 +6,7 @@ import { Link, useHistory } from 'react-router-dom';
 
 const AddMovieForm = (props) => {
     const { push } = useHistory();
-
+     const {addMovie} = props;
     const [movie, setMovie] = useState({
         title: "",
         director: "",
@@ -22,10 +22,19 @@ const AddMovieForm = (props) => {
         });
     }
 
-    const handleSubmit = (e) => {
-    }
+    const handleSubmit = (event) => {	    
+       props.addMovie(movie)
+         push('/movies/')
+    }	    
 
     const { title, director, genre, metascore, description } = movie;
+    const mapStateToProps = (state) => {
+        return ({})
+    }
+
+
+
+
     return(<div className="col">
         <div className="modal-dialog">
             <div className="modal-content">
@@ -66,5 +75,8 @@ const AddMovieForm = (props) => {
         </div>
     </div>);
 }
+const mapStateToProps = (state) => {
+    return ({})
+}
 
-export default AddMovieForm;
+export default connect(mapStateToProps,{addMovie})(AddMovieForm); 
